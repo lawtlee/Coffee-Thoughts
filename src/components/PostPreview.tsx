@@ -17,14 +17,11 @@ function Preview(props: props): JSX.Element {
 
     useEffect(()=>{
         if (props.index) setIndex(props.index)
-        
-        console.log(props)
-
     })
 
     return(
-        <div className={`flex w-[75vw] ${(index % 2 == 0) ? "flex-wrap" : "flex-nowrap"} justify-between`}>
-            <div className={`w-[45%] bg-[#D9D9D9] h-[301px] flex justify-center items-center`}>
+        <div className={`flex w-[75vw] ${(index % 2 == 0) ? "flex-wrap" : "flex-nowrap flex-row-reverse"} justify-between z-[1]`}>
+            <div className={`w-[45%] bg-[#D9D9D9] h-[301px] flex justify-center items-center hover:cursor-pointer`}>
                 <img src={props.blog.image} alt="Photo" className="contain"/>
             </div>
             <div className={`w-[45%] h-full flex flex-col gap-5 text-left text-teal`}>
