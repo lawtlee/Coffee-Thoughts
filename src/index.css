@@ -1,0 +1,11 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+
+/* https://fonts.google.com/specimen/Reem+Kufi */
+@import url("https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@400;700&display=swap");
+
+body {
+    font-family: 'Reem Kufi', sans-serif;
+};
