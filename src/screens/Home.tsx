@@ -69,9 +69,9 @@ const Home: React.FC = () => {
                 <div className={`flex flex-row flex-wrap justify-center items-center`}>
                     <img src="home/categoryBG.png" className=""/>
                     <div className="flex absolute justify-evenly w-[75%] flex-wrap">
-                        <CircleLink link="" title="Coffee Shop"/>
-                        <CircleLink link="" title="DEEZ"/>
-                        <CircleLink link="" title="CS"/>
+                        <CircleLink link="/coffee-shops" title="Coffee Shop"/>
+                        <CircleLink link="/deez" title="DEEZ"/>
+                        <CircleLink link="/cs" title="CS"/>
                     </div>
                 </div>
             </div>
