@@ -14,7 +14,7 @@ const fade = {
     }
 }
 
-const Login: React.FC = () => {
+const AdminHome: React.FC = () => {
     const [animate, setAnimate] = useState(false)
     const [email, setEmail] = useState("")
     const [password, setPassowrd] = useState("")
@@ -120,4 +120,4 @@ const Login: React.FC = () => {
     );
 }
 
-export default Login
+export default AdminHome

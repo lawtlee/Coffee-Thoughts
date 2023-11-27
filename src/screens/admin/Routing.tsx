@@ -1,21 +1,17 @@
 import React from "react"
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-
+import { Routes, Route } from 'react-router-dom'
 import HTML404 from "../404html"
-import Login from "./Login"
+import AdminHome from "./AdminHome"
 import Editor from "./EditBlogs"
 import Dashboard from "./AdminDashboard"
 
 const Routing: React.FC = () => {
     return(
         <Routes>
-            <Route path="/" element={<Login/>}/>
+            <Route path="/" element={<AdminHome/>}/>
             <Route path="/dashboard" element={<Dashboard/>}/>
             <Route 
-                path="/editor/:id" 
-
-                element={<Editor/>}
-            />
+                path="/editor/:topic/:id?" element={<Editor/>}/>
             <Route path="/*" element={<HTML404/>}/>
         </Routes>
     )

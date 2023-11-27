@@ -15,7 +15,7 @@ const Dashboard: React.FC = () => {
     return(
         <div className="flex-col justify-center w-screen items-center flex gap-10">
             <AdminNavbar/>
-            {SampleBlogs.map((blog, key) => (<BlogCard title={blog.title} date={blog.date} image={blog.photo}/>))}
+            {SampleBlogs.map((blog, key) => (<BlogCard title={blog.title} date={blog.date} image={blog.photo} id=""/>))}
         </div>
     )
 }
