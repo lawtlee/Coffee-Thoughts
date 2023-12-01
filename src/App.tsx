@@ -1,30 +1,33 @@
 import { BrowserRouter, Routes, Route, createBrowserRouter, RouterProvider  } from 'react-router-dom'
-import './App.css'
-import Home from './screens/Home'
 import HTML404 from './screens/404html'
-import Routing from './screens/admin/Routing'
+import AdminRouter from './screens/admin/AdminRouter'
 import Dashboard from './screens/admin/AdminDashboard'
-import AdminHome from './screens/admin/AdminHome'
 import Editor from './screens/admin/EditBlogs'
-import EditorLoader from './loaders/loader'
+import AddBlog from './screens/admin/AddBlog'
+// import { AdminRouter } from './screens/admin/'
+import { EditorLoader, DashboardLoader, adminLoader, } from './utilities/loader'
+import Test from "./screens/test"
+import AppRouter from './screens/AppRouter'
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home />,
+    element: <AppRouter />,
     errorElement: <HTML404 />,
     children: [
       // { path: "", element: <HomePage /> },
       // { path: "about", element: <AboutPage /> },
     ],
   },{
-    path: "/admin",
-    element: <Routing/>,
+    path: "/admin/*",
+    element: <AdminRouter/>,
     errorElement: <HTML404/>,
     children:[
-      {path: "dashboard", element: <Dashboard/>},
+      {path: "dashboard", element: <Dashboard/>, },
       {path: "editor/:topic/:id?", element: <Editor/>, 
         loader: EditorLoader,
       },
+      {path: "test", element: <Test/>},
+      {path:"addblog", element: <AddBlog/>},
     ]
   }
 ], {basename: "/Coffee-Thoughts/"});

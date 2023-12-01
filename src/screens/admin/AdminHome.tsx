@@ -4,6 +4,7 @@ import { TextField } from "@mui/material"
 import { signInWithEmailAndPassword } from "firebase/auth";
 
 import { auth } from "../../firebase";
+import { useNavigate } from "react-router-dom";
 
 const fade = {
     hidden:{
@@ -18,6 +19,8 @@ const AdminHome: React.FC = () => {
     const [animate, setAnimate] = useState(false)
     const [email, setEmail] = useState("")
     const [password, setPassowrd] = useState("")
+    const [error, setError] = useState(false);
+    const navigate = useNavigate()
 
     const handleKeyPress = (event: KeyboardEvent) => {
         if (event.key == "Enter" && animate)
@@ -25,9 +28,8 @@ const AdminHome: React.FC = () => {
     }
 
     useEffect(()=>{
-        // if (localStorage["uid"] != ""){
-        //     window.location.href="/Coffee-Thoughts/admin/dashboard";
-        // }
+        // if (localStorage.getItem("uid") != undefined)
+        //     navigate("dashboard")
         window.addEventListener("keydown", handleKeyPress);
     
         return () => window.removeEventListener("keydown", handleKeyPress);
@@ -48,12 +50,13 @@ const AdminHome: React.FC = () => {
         .then((userCredential) => {
           // Signed in 
             const user = userCredential.user;
-            localStorage['uid'] = user.uid;
-            window.location.href="/Coffee-Thoughts/admin/dashboard"
-            console.log(user)
+            localStorage.setItem("uid", user.uid);
+            navigate("dashboard");
+            console.log(user);
         })
         .catch((error) => {
             console.log(error)
+            setError(true);
         });
     }
 
@@ -69,9 +72,9 @@ const AdminHome: React.FC = () => {
                 variants={fade} 
                 initial="show" 
                 animate={animate ? {
-                    y: -100,
+                    y: -110 - (error ? 30 : 0),
                 } : "show"} 
-                transition={{duration: 1}} 
+                transition={{duration: error ? 0 : 1}} 
             >
                 <img src="/Coffee-Thoughts/admin/login/cloud.png" alt="clouds" />
                 <div className="flex justify-center items-center text-center">
@@ -87,15 +90,18 @@ const AdminHome: React.FC = () => {
                 animate={animate ? "show" : "hidden"} 
                 transition={{ duration: 1, delay: .85}}
             >
-                <TextField fullWidth label="email" id="fullWidth" 
+                <TextField fullWidth label="email" id="fullWidth"
                     onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                         setEmail(event.target.value);
                     }}
+                    error={error}
                 />
                 <TextField fullWidth label="password" id="fullWidth" type="password"
                     onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                         setPassowrd(event.target.value);
                     }}
+                    error={error}
+                    helperText={error ? "Incorrect email or password" : ""}
                 />
             </motion.div>
             <motion.div

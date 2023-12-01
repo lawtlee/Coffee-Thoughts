@@ -1,42 +1,46 @@
-import React, { useEffect, useState } from "react"
-import { useNavigate, useLocation } from "react-router-dom"
+import React, { useEffect, useState, useRef } from "react"
+import { useNavigate } from "react-router"
 import AdminNavbar from "./components/AdminNavbar";
 import { DescriptionField, TitleField, SelectCategory, MainBody } from "./components/EditorComponents";
 import EditorButton from "./components/EditorButton";
+import ImageUpload from "./components/UploadImage";
 import { Bounce } from "react-activity";
 import "react-activity/dist/library.css";
+import { addBlogs } from "../../utilities/utilities";
 
-const Editor: React.FC = () => {
+const AddBlog: React.FC = () => {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [body, setBody] = useState("");
     const [category, setCategory] = useState("");
     const [returnToDash, setReturn] = useState(false);
     const [loading, setLoading] = useState(false);
-    const [images, setImages] = useState(Array<string>)
-
+    const [images, setImages] = useState<any>([])
+    
     const navigate = useNavigate();
-    const location = useLocation();
 
-    console.log()
+    const uploadBlog = async () => {
+        setLoading(true);
+
+        const data = {
+            bodyText: body,
+            title: title,
+            description: description,
+            images: images,
+            category: category,
+        }
+
+        const res = await addBlogs(data);
+
+        console.log(res)
+
+        setLoading(false)
+    }
 
     useEffect(()=>{
-        if (location.state) setTitle(location.state.title);
-        if (location.state) setBody(location.state.body);
-        if (location.state) setDescription(location.state.description);
-        if (location.state) {
-            if (location.state.category == "coffee-shops")
-                setCategory("Coffee Shops")
-            if (location.state.category == "deez")
-                setCategory("Deez")
-            if (location.state.category == "cs")
-                setCategory("CS")
-    };
-        if (location.state) setImages(location.state.images);
-        // console.log(blogData)
-    },[])
+        console.log(images)
+    },[images])
 
-    
     return(
         <div className="flex flex-col items-center gap-10 pb-10">
             <div className={`w-full h-full bg-[#D9D9D9]/40 fixed flex-row justify-center items-center ${loading ? "flex" : "hidden"} z-[1]`}>
@@ -53,7 +57,7 @@ const Editor: React.FC = () => {
                             <line x1="20" y1="13" x2="6" y2="13" stroke="white" strokeWidth="2"/>
                         </svg>
                         <p>
-                            EDIT POST
+                            ADD POST
                         </p>
                     </div>
                     <div className="flex flex-row items-center gap-1 hover:text-[#547E88] underline hover:underline-[#547E88]
@@ -72,9 +76,17 @@ const Editor: React.FC = () => {
                 </div>
                 <div className="text-black flex-row flex justify-between items-center">
                     <TitleField stateFunction={setTitle} value={title}/>
-                    <EditorButton title="IMAGE UPLOAD"/>
-                    <EditorButton title="SAVE DRAFT"/>
-                    <EditorButton title="PUBLISH"/>
+                    {/* <EditorButton title="UPLOAD IMAGE"/> */}
+                    {/* <EditorButton title="UPLOAD IMAGE" /> */}
+                    <ImageUpload images={images} setImage={setImages}/>
+                    <div
+                        onClick={()=>console.log("here")}
+                    >
+                        <EditorButton title="SAVE DRAFT"/>
+                    </div>
+                    <div onClick={()=>{uploadBlog()}}>
+                        <EditorButton title="PUBLISH"/>
+                    </div>
                 </div>
                 <div className="flex flex-row justify-between w-[100%]">
                     <div className="w-[70%]">
@@ -92,4 +104,4 @@ const Editor: React.FC = () => {
     )
 }
 
-export default Editor
+export default AddBlog
