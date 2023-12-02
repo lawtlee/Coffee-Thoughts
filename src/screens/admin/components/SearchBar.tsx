@@ -8,6 +8,7 @@ const HelperBar:React.FC = () => {
 
     const navigate = useNavigate()
 
+
     return(
         <div className="w-[80%] h-[60px] rounded-[34.5px] flex items-center justify-evenly flex-row">
             <div className="w-[70%] border-2 border-black h-[60px] rounded-[34.5px] bg-white
@@ -25,6 +26,7 @@ const HelperBar:React.FC = () => {
                             fontFamily: "Red Hat Mono",
                             width: "100%",
                         }}
+                        value={search}
                     />
                 </div>
                 <div className={`pr-5 ${startSearch ? "block" : "hidden"}`}>

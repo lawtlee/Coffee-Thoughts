@@ -15,8 +15,10 @@ const Dashboard: React.FC = () => {
     // console.log(blogs)
 
     useEffect(()=>{
-        if (!refresh)
+        if (!refresh){
             apiCalls();
+            setRefresh(true);
+        }
     },[refresh])
 
     // useEffect(()=>{

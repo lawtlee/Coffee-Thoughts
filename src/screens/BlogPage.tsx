@@ -15,7 +15,8 @@ const BlogPage: React.FC = () => {
 
     const location = useLocation();
     const { category, id } = useParams();
-    
+    console.log(images)
+
     const getBlogs = async() => {
         setFetch(true);
         const blog = await fetchBlogs(category, id)

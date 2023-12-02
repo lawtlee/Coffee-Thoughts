@@ -16,7 +16,7 @@ const Editor: React.FC = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
-    console.log()
+    console.log(images, setLoading)
 
     useEffect(()=>{
         if (location.state) {

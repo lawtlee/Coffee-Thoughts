@@ -9,23 +9,25 @@ const ImageUpload: React.FC<props> = (props) => {
     const [image, setImage] = useState();
     const inputFile = useRef(null);
 
-    const handleFileUpload = e => {
+    const handleFileUpload = (e: any) => {
         const { files } = e.target;
         if (files && files.length) {
-        const filename = files[0].name;
-
-        var parts = filename.split(".");
-        const fileType = parts[parts.length - 1];
+        // const filename = files[0].name;
+        console.log(image);
+        // var parts = filename.split(".");
+        // const fileType = parts[parts.length - 1];
         // console.log("fileType", fileType); //ex: zip, rar, jpg, svg etc.
         setImage(files[0]);
-        // setImage(image.push(files[0]))
+        // setImage(image.push(files[0])
         // props.setImage(files[0])
         console.log(props)
     }
   };
 
     const onButtonClick = () => {
-      inputFile.current.click();
+      // if (inputFile.current != null){
+      //   inputFile.current.click();
+      // }
     };
 
     // console.log("imageimage", image);

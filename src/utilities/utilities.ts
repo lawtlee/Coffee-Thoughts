@@ -1,6 +1,6 @@
 import { database } from "../firebase"
 import { collection, getDoc, getDocs, addDoc, doc } from "firebase/firestore"
-import { TimeStampToDate, sortByDate } from "./dataParsing"
+import { sortByDate } from "./dataParsing"
 
 interface addBlogsProps{
     bodyText: string,
@@ -95,6 +95,7 @@ const addBlogs = async (props: addBlogsProps): Promise<{status: number, message:
             console.log(err)
             return{status: 200, message: err}
         })
+    console.log(docRef)
 
     return {status: 1, message: "Uploaded Document!"};
 }

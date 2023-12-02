@@ -1,13 +1,8 @@
-import { Timestamp } from "firebase/firestore";
+// import { Timestamp } from "firebase/firestore";
 
-
-
-function compareFunction(){
-
-}
 
 function TimeStampToDate(date : any){
-    // console.log(date)
+    console.log(date)
     return 1;
 }
 
