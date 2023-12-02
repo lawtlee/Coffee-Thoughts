@@ -4,7 +4,6 @@ import HTML404 from "../404html"
 import AdminHome from "./AdminHome"
 import Editor from "./EditBlogs"
 import Dashboard from "./AdminDashboard"
-import Test from "../test"
 import AddBlog from "./AddBlog"
 
 const AdminRouter: React.FC = () => {
@@ -22,7 +21,6 @@ const AdminRouter: React.FC = () => {
             <Route path="/editor/:topic/:id?" element={loggedIn ? <Editor/> : <HTML404/>}/>
             <Route path="/addblog" element={loggedIn ? <AddBlog/> : <HTML404/>}/>
             <Route path="/*" element={<HTML404/>}/>
-            <Route path="/test" element={loggedIn ? <Test/> : <HTML404/>}/>
         </Routes>
     )
 }

@@ -4,8 +4,6 @@ import AdminNavbar from "./components/AdminNavbar";
 import { DescriptionField, TitleField, SelectCategory, MainBody } from "./components/EditorComponents";
 import EditorButton from "./components/EditorButton";
 import ImageUpload from "./components/UploadImage";
-import { Bounce } from "react-activity";
-import "react-activity/dist/library.css";
 import { addBlogs } from "../../utilities/utilities";
 
 const AddBlog: React.FC = () => {
@@ -44,7 +42,6 @@ const AddBlog: React.FC = () => {
     return(
         <div className="flex flex-col items-center gap-10 pb-10">
             <div className={`w-full h-full bg-[#D9D9D9]/40 fixed flex-row justify-center items-center ${loading ? "flex" : "hidden"} z-[1]`}>
-                <Bounce/>
             </div>
             <AdminNavbar/>
             <div className="w-[70vw] flex-col flex gap-5">

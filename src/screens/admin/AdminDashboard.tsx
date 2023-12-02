@@ -8,7 +8,7 @@ const Dashboard: React.FC = () => {
     const [blogs, setBlogs] = useState<any[]>([])
     const [refresh, setRefresh] = useState(false)
     const apiCalls = async() => {
-        const newBlogs = await retrieveAllBlogs()
+        const newBlogs = await retrieveAllBlogs(false)
         setBlogs(newBlogs)
     }
 

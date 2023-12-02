@@ -28,8 +28,8 @@ const AdminHome: React.FC = () => {
     }
 
     useEffect(()=>{
-        // if (localStorage.getItem("uid") != undefined)
-        //     navigate("dashboard")
+        if (localStorage.getItem("uid") != undefined)
+            navigate("dashboard")
         window.addEventListener("keydown", handleKeyPress);
     
         return () => window.removeEventListener("keydown", handleKeyPress);

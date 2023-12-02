@@ -3,8 +3,6 @@ import { useNavigate, useLocation } from "react-router-dom"
 import AdminNavbar from "./components/AdminNavbar";
 import { DescriptionField, TitleField, SelectCategory, MainBody } from "./components/EditorComponents";
 import EditorButton from "./components/EditorButton";
-import { Bounce } from "react-activity";
-import "react-activity/dist/library.css";
 
 const Editor: React.FC = () => {
     const [title, setTitle] = useState("");
@@ -21,26 +19,26 @@ const Editor: React.FC = () => {
     console.log()
 
     useEffect(()=>{
-        if (location.state) setTitle(location.state.title);
-        if (location.state) setBody(location.state.body);
-        if (location.state) setDescription(location.state.description);
         if (location.state) {
+            setTitle(location.state.title);
+            setBody(location.state.body);
+            setDescription(location.state.description);
             if (location.state.category == "coffee-shops")
                 setCategory("Coffee Shops")
             if (location.state.category == "deez")
                 setCategory("Deez")
             if (location.state.category == "cs")
                 setCategory("CS")
-    };
-        if (location.state) setImages(location.state.images);
-        // console.log(blogData)
+            setImages(location.state.images);
+        } else {
+            throw new Error("Invalid Routing")
+        }
     },[])
 
     
     return(
         <div className="flex flex-col items-center gap-10 pb-10">
             <div className={`w-full h-full bg-[#D9D9D9]/40 fixed flex-row justify-center items-center ${loading ? "flex" : "hidden"} z-[1]`}>
-                <Bounce/>
             </div>
             <AdminNavbar/>
             <div className="w-[70vw] flex-col flex gap-5">
