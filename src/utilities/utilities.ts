@@ -1,6 +1,6 @@
 import { database, storage } from "../firebase"
 import { collection, getDoc, getDocs, addDoc, doc } from "firebase/firestore"
-import { ref, uploadBytes } from "firebase/storage";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { sortByDate } from "./dataParsing"
 
 interface addBlogsProps{
@@ -125,4 +125,21 @@ const uploadImage = async(images: File[]): Promise<{status: number, message: str
     return {status: 100, message: "Uploaded Images", imageUrls: imagePaths};
 }
 
-export { retrieveAllBlogs, addBlogs, retireveAllTopic, fetchBlogs, uploadImage }
+const retrieveImage = async(imagePath: string)=> {
+    const imageRef = ref(storage, imagePath)
+    const result = await getDownloadURL(imageRef)
+    return result
+}
+
+const retrieveAllImages = async(images: string[]) => {
+    const imagePaths: string[] = [];
+    for (const image of images){
+        const imageRef = ref(storage, image);
+        const result = await getDownloadURL(imageRef)
+        imagePaths.push(result)
+    }
+    return imagePaths;
+}
+
+export { retrieveAllBlogs, addBlogs, retireveAllTopic, 
+    fetchBlogs, uploadImage, retrieveImage, retrieveAllImages }

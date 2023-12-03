@@ -9,10 +9,11 @@ const Dashboard: React.FC = () => {
     const [refresh, setRefresh] = useState(false)
     const apiCalls = async() => {
         const newBlogs = await retrieveAllBlogs(false)
+        console.log(newBlogs)
         setBlogs(newBlogs)
     }
 
-    // console.log(blogs)
+    console.log(blogs)
 
     useEffect(()=>{
         if (!refresh){
@@ -21,13 +22,6 @@ const Dashboard: React.FC = () => {
         }
     },[refresh])
 
-    // useEffect(()=>{
-    //     console.log(blogs)
-    //     if (blogs.length != 0){
-    //         console.log("here")
-    //         setDisplay(display)
-    //     }
-    // },[blogs])
 
     return(
         <div className="flex-col justify-center w-screen items-center flex gap-10">

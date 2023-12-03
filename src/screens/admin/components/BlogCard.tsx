@@ -1,6 +1,9 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaRegTrashAlt, FaPencilAlt, FaExternalLinkAlt } from "react-icons/fa";
 import "./BlogCard.scss"
+import { retrieveImage } from "../../../utilities/utilities";
+import { useEffect } from "react";
 
 interface prop{
     blog: {
@@ -19,11 +22,9 @@ interface prop{
 }
 
 function BlogCard(props: prop): JSX.Element {
+    const [imagePath, setPath] = useState("")
     const date = new Date((props.blog.date.seconds * 1000) + (props.blog.date.nanoseconds / 1000000))
-    // console.log(props)
     const navigate = useNavigate()
-
-    // console.log(props.blog.date)
 
     const editLink = () =>{
         navigate(`/admin/editor/${props.blog.category}/${props.blog.id}`, 
@@ -35,11 +36,21 @@ function BlogCard(props: prop): JSX.Element {
             body: props.blog.bodyText,
         }})
     }
+    
+    const getImageUrl = async() =>{
+        if (props.blog.images.length != 0)
+            setPath(await retrieveImage(props.blog.images[0]))
+    }
+
+    useEffect(()=>{
+        if (props.blog.images.length != 0 && imagePath == "")
+            getImageUrl();
+    },[])
 
     return(
         <div className="w-[80%] flex gap-5 h-[75px] items-center bg-white border-black border-2 font-RedHat text-[20px]">
             <div className="w-[15%] bg-[#D9D9D9] h-full flex justify-center items-center">
-                <img src={props.blog.images[0]} alt="Photo"/>
+                <img src={imagePath} alt="Photo" className="object-cover"/>
             </div>
             <div className="flex items-center justify-evenly w-[85%]">
                 <p className="w-[55%] text-ellipsis overflow-hidden whitespace-nowrap">{props.blog.title}</p>
