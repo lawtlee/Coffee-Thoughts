@@ -1,4 +1,4 @@
-import React, { useState, useRef, Dispatch, SetStateAction } from "react";
+import React, { useState, useRef, Dispatch, SetStateAction, useEffect } from "react";
 
 interface props{
     setImage: Dispatch<SetStateAction<Array<any>>>;
@@ -6,28 +6,31 @@ interface props{
 }
 
 const ImageUpload: React.FC<props> = (props) => {
-    const [image, setImage] = useState();
-    const inputFile = useRef(null);
+    const [image, setImage] = useState(props.images);
+    const inputFile = useRef<HTMLInputElement>(null);
+
+    useEffect(()=>{
+      console.log(image)
+    },[image])
 
     const handleFileUpload = (e: any) => {
         const { files } = e.target;
         if (files && files.length) {
-        // const filename = files[0].name;
-        console.log(image);
-        // var parts = filename.split(".");
-        // const fileType = parts[parts.length - 1];
-        // console.log("fileType", fileType); //ex: zip, rar, jpg, svg etc.
-        setImage(files[0]);
-        // setImage(image.push(files[0])
-        // props.setImage(files[0])
-        console.log(props)
-    }
+            // const filename = files[0].name;
+            // console.log(typeof files[0]);
+            // var parts = filename.split(".");
+            // const fileType = parts[parts.length - 1];
+            // console.log("fileType", fileType); //ex: zip, rar, jpg, svg etc.
+            const newImage = [...image, files[0]];
+            setImage(newImage);
+            props.setImage(newImage)
+        }
   };
 
     const onButtonClick = () => {
-      // if (inputFile.current != null){
-      //   inputFile.current.click();
-      // }
+      if (inputFile.current != null){
+        inputFile.current.click();
+      }
     };
 
     // console.log("imageimage", image);

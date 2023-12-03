@@ -14,11 +14,17 @@ const AddBlog: React.FC = () => {
     const [returnToDash, setReturn] = useState(false);
     const [loading, setLoading] = useState(false);
     const [images, setImages] = useState<any>([])
-    
+
     const navigate = useNavigate();
+
+    const uploadImages = async() => {
+        
+    }
 
     const uploadBlog = async () => {
         setLoading(true);
+
+
 
         const data = {
             bodyText: body,
