@@ -1,5 +1,6 @@
-import { database } from "../firebase"
+import { database, storage } from "../firebase"
 import { collection, getDoc, getDocs, addDoc, doc } from "firebase/firestore"
+import { ref, uploadBytes } from "firebase/storage";
 import { sortByDate } from "./dataParsing"
 
 interface addBlogsProps{
@@ -7,7 +8,7 @@ interface addBlogsProps{
     title: string,
     description: string,
     category: string,
-    images: Array<any>
+    images: string[]
 }
 
 interface blogStruct{
@@ -50,8 +51,6 @@ const retrieveAllBlogs = async (asc: boolean): Promise<Array<blogStruct>> => {
         blogs = sortByDate(blogs, asc)
     });
 
-    // console.log(blogs)
-
     return blogs;
 }
 
@@ -61,7 +60,6 @@ const retireveAllTopic = async(topic: string, asc: boolean) => {
     const querySnapshot = await getDocs(collection(database, topic));
     querySnapshot.forEach(async (data) => {
         const blogData = data.data();
-        // console.log(blogData)
         const blogObject: blogStruct = {
             title: blogData.title,
             date: blogData.date,
@@ -111,9 +109,20 @@ const fetchBlogs = async(topic: any, id: any) => {
     }
 }
 
-// const docRef = await addDoc(collection(db, "cities"), {
-//     name: "Tokyo",
-//     country: "Japan"
-// });
+const uploadImage = async(images: File[]): Promise<{status: number, message: string, imageUrls: string[]}> => {
+    console.log("here")
 
-export { retrieveAllBlogs, addBlogs, retireveAllTopic, fetchBlogs }
+    const imagePaths: string[] = [];
+    images.forEach((image)=>{
+        const storageRef = ref(storage, image.name)
+        imagePaths.push(image.name)
+        uploadBytes(storageRef, image)
+            .catch((err)=>{
+                return ({status: 200, message: err, imageUrls: []})
+        });
+    })
+
+    return {status: 100, message: "Uploaded Images", imageUrls: imagePaths};
+}
+
+export { retrieveAllBlogs, addBlogs, retireveAllTopic, fetchBlogs, uploadImage }

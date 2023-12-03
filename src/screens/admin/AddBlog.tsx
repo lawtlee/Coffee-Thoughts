@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 import { useNavigate } from "react-router"
 import AdminNavbar from "./components/AdminNavbar";
 import { DescriptionField, TitleField, SelectCategory, MainBody } from "./components/EditorComponents";
 import EditorButton from "./components/EditorButton";
 import ImageUpload from "./components/UploadImage";
-import { addBlogs } from "../../utilities/utilities";
+import { addBlogs, uploadImage } from "../../utilities/utilities";
 
 const AddBlog: React.FC = () => {
     const [title, setTitle] = useState("");
@@ -18,32 +18,34 @@ const AddBlog: React.FC = () => {
     const navigate = useNavigate();
 
     const uploadImages = async() => {
-        
+        const res = await uploadImage(images);
+        if (res.status == 200){
+            // error message
+            throw new Error("Image Upload Failed")
+        } else if (res.status == 100){
+            return res.imageUrls;
+        }
     }
 
     const uploadBlog = async () => {
         setLoading(true);
 
+        const imageUrls = await uploadImages();
 
+        setLoading(false)
 
         const data = {
             bodyText: body,
             title: title,
             description: description,
-            images: images,
+            images: imageUrls || [],
             category: category,
         }
 
-        const res = await addBlogs(data);
-
-        console.log(res)
+        await addBlogs(data);
 
         setLoading(false)
     }
-
-    useEffect(()=>{
-        console.log(images)
-    },[images])
 
     return(
         <div className="flex flex-col items-center gap-10 pb-10">
@@ -102,6 +104,9 @@ const AddBlog: React.FC = () => {
                 <div className="w-[100%]">
                     <MainBody stateFunction={setBody} value={body}/>
                 </div>
+            </div>
+            <div onClick={()=>{uploadBlog()}}>
+                Button
             </div>
         </div>
     )
