@@ -24,7 +24,7 @@ const BlogPage: React.FC = () => {
         setImages(await retrieveAllImages(blog.images))
         const formatDate = new Date((blog.date.seconds * 1000) + (blog.date.nanoseconds / 1000000))
         setDate(`${formatDate.getMonth() + 1}.${formatDate.getDate()}.${formatDate.getFullYear()}`)
-        if (blog.bodyText.split(/\r\n|\r|\n/).length < 11) {
+        if (blog.bodyText.split(/\r\n|\r|\n/).length < 7) {
             setAbsolute("md:absolute");
         }
     }
@@ -42,7 +42,7 @@ const BlogPage: React.FC = () => {
                 formatDate.getMonth() + 1
             }.${formatDate.getDate()}.${formatDate.getFullYear()}`
         );
-        if (location.state.body.split(/\r\n|\r|\n/).length < 11) {
+        if (location.state.body.split(/\r\n|\r|\n/).length < 5) {
             setAbsolute("md:absolute");
         }
     }

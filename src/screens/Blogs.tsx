@@ -3,7 +3,6 @@ import { retrieveAllBlogs } from "../utilities/utilities";
 import Preview from "../components/PostPreview";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import PhotoGallery from "../components/ImageGallery";
 
 const Blogs:React.FC = () =>{
     const [blogs, setBlogs] = useState<any>([])
