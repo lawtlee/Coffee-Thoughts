@@ -3,6 +3,7 @@ import { retrieveAllBlogs } from "../utilities/utilities";
 import Preview from "../components/PostPreview";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import PhotoGallery from "../components/ImageGallery";
 
 const Blogs:React.FC = () =>{
     const [blogs, setBlogs] = useState<any>([])
@@ -11,11 +12,13 @@ const Blogs:React.FC = () =>{
     const getBlogs = async()=>{
         const tempBlogs = await retrieveAllBlogs(false)
         if (tempBlogs.length >= 2){
-            setBlogs([tempBlogs[0], tempBlogs[1]]);
+            setBlogs(tempBlogs);
         } else if (tempBlogs.length == 1){
             setBlogs([tempBlogs[0]])
         }
     }
+
+    console.log(blogs)
 
     useEffect(()=>{
         if (!load){
@@ -27,11 +30,11 @@ const Blogs:React.FC = () =>{
     return (
         <div className="flex flex-col gap-10 bg-white min-h-screen items-center">
             <Navbar />
-            <div>
+            <div className="flex flex-col gap-10 items-center">
                 {blogs.length == 0 ? (
                     <div className="h-[75vh]"></div>
                 ) : (
-                    <div className="min-h-[75vh]">
+                    <div className="min-h-[75vh] flex flex-col gap-10 items-center">
                         {blogs.map(
                             (
                                 blog: {

@@ -8,6 +8,7 @@ import CoffeeShops from './CoffeeShops';
 import About from './About';
 import Blogs from './Blogs';
 import Contact from './Contact';
+import PhotoGallery from '../components/ImageGallery';
 
 const AppRouter:React.FC = () => {
     return(
@@ -20,6 +21,7 @@ const AppRouter:React.FC = () => {
             <Route path="/about" element={<About/>}/>
             <Route path="/blogs" element={<Blogs/>}/>
             <Route path="/contact" element={<Contact/>}/>
+            <Route path="/test" element={<PhotoGallery images={["Rectangle.png", "Lines.png"]}/>}/>
         </Routes>
     )
 }

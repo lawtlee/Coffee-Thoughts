@@ -51,7 +51,7 @@ const CS: React.FC = () => {
                         >
                             <p className="w-[80%]">CS</p>
                         </Link>
-                        <p className="font-RedHat xl:text-[30px] lg:w-[60%] md:text-[24px] text-[14px] text-[#547E88]">
+                        <p className="font-RedHat xl:text-[26px] lg:w-[60%] md:text-[22px] text-[14px] text-[#547E88]">
                             CS is a category where I put my thoughts about new frameworks that I discover or projects
                             that I am working on. It is a sanctuary for my passion of Computer Science
                         </p>

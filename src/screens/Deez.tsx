@@ -52,7 +52,7 @@ const Deez: React.FC = () => {
                         >
                             <p className="w-[80%]">DEEZ</p>
                         </Link>
-                        <p className="font-RedHat xl:text-[30px] lg:w-[60%] md:text-[24px] text-[14px] text-[#547E88]">
+                        <p className="font-RedHat xl:text-[26px] lg:w-[60%] md:text-[22px] text-[14px] text-[#547E88]">
                             Deez is a “nutty” category. It contains random
                             thoughts and other blogs that can’t be contained
                             within Coffee Shop blogs or CS blogs. It’s where

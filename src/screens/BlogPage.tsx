@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { useParams, useLocation } from "react-router-dom"
-import { fetchBlogs } from "../utilities/utilities";
+import { fetchBlogs, retrieveAllImages } from "../utilities/utilities";
 import Navbar from "../components/Navbar"
 import Footer from "../components/Footer";
 import PhotoGallery from "../components/ImageGallery";
@@ -15,14 +15,13 @@ const BlogPage: React.FC = () => {
 
     const location = useLocation();
     const { category, id } = useParams();
-    console.log(images)
 
     const getBlogs = async() => {
         setFetch(true);
         const blog = await fetchBlogs(category, id)
         setBody(blog.bodyText)
         setTitle(blog.title)
-        setImages(blog.images)
+        setImages(await retrieveAllImages(blog.images))
         const formatDate = new Date((blog.date.seconds * 1000) + (blog.date.nanoseconds / 1000000))
         setDate(`${formatDate.getMonth() + 1}.${formatDate.getDate()}.${formatDate.getFullYear()}`)
         if (blog.bodyText.split(/\r\n|\r|\n/).length < 11) {
@@ -30,17 +29,27 @@ const BlogPage: React.FC = () => {
         }
     }
 
+    const setValues = async() =>{
+        setTitle(location.state.title);
+        setBody(location.state.body);
+        setImages(await retrieveAllImages(location.state.images));
+        const retrieveDate = location.state.date;
+        const formatDate = new Date(
+            retrieveDate.seconds * 1000 + retrieveDate.nanoseconds / 1000000
+        );
+        setDate(
+            `${
+                formatDate.getMonth() + 1
+            }.${formatDate.getDate()}.${formatDate.getFullYear()}`
+        );
+        if (location.state.body.split(/\r\n|\r|\n/).length < 11) {
+            setAbsolute("md:absolute");
+        }
+    }
+
     useEffect(()=>{
-        if (location.state) {
-            setTitle(location.state.title);
-            setBody(location.state.body);
-            setImages(location.state.images);
-            const retrieveDate = location.state.date
-            const formatDate = new Date((retrieveDate.seconds * 1000) + (retrieveDate.nanoseconds / 1000000))
-            setDate(`${formatDate.getMonth() + 1}.${formatDate.getDate()}.${formatDate.getFullYear()}`)
-            if (location.state.body.split(/\r\n|\r|\n/).length < 11){
-                setAbsolute("md:absolute")
-            }
+        if (location.state && title == "") {
+            setValues()
         } else if (!fetch){
             getBlogs();
         }
@@ -56,7 +65,7 @@ const BlogPage: React.FC = () => {
                 </div>
                 <p className="whitespace-pre-line text-[20px] font-NovoMono">{body}</p>
             </div>
-            <PhotoGallery/>
+            <PhotoGallery images={images}/>
             <div className={`bottom-0 ${absolute}`}>
                 <Footer/>
             </div>

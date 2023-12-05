@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { retrieveImage } from "../utilities/utilities"
 
 interface props{
     blog:{
@@ -20,6 +21,7 @@ interface props{
 
 function Preview(props: props): JSX.Element {
     const [index, setIndex] = useState(0)
+    const [imagePath, setPath] = useState("")
     const date = new Date((props.blog.date.seconds * 1000) + (props.blog.date.nanoseconds / 1000000))
 
     const navigate = useNavigate();
@@ -34,16 +36,23 @@ function Preview(props: props): JSX.Element {
         }})
     }
 
+    const getImageUrl = async() => {
+        if (props.blog.images.length != 0)
+            setPath(await retrieveImage(props.blog.images[0]))
+    }
+    
     useEffect(()=>{
         if (props.index) setIndex(props.index)
-    })
+        if (props.blog.images.length != 0 && imagePath == "")
+            getImageUrl();
+    },[])
 
     return(
         <div className={`flex w-[75vw] ${(index % 2 == 0) ? "flex-row" : "flex-row-reverse"} flex-wrap justify-between z-[1] gap-2`}>
             <div className={`md:w-[45%] bg-[#D9D9D9] md:h-[301px] h-[20vh] w-full flex justify-center items-center hover:cursor-pointer`}>
-                <img src={props.blog.images[0]} alt="Photo" className="contain"/>
+                <img src={imagePath} alt="Photo" className=""/>
             </div>
-            <div className={`md:w-[45%] h-full flex flex-col gap-5 text-left text-teal`}>
+            <div className={`md:w-[45%] h-full flex flex-col gap-5 md:text-left w-full text-teal`}>
                 <p className="font-NovoMono text-[16px]">{date.getMonth() + 1}.{date.getDate()}.{date.getFullYear()}</p>
                 <p className="font-semibold text-[32px]">{props.blog.title}</p>
                 <p className="font-RedHat text-[20px]">

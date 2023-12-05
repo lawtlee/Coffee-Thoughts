@@ -51,7 +51,7 @@ const CoffeeShops: React.FC = () => {
                         >
                             <p className="w-[80%]">Coffee Shops</p>
                         </Link>
-                        <p className="font-RedHat xl:text-[30px] lg:w-[60%] md:text-[24px] text-[14px] text-[#547E88]">
+                        <p className="font-RedHat xl:text-[26px] lg:w-[60%] md:text-[22px] text-[14px] text-[#547E88]">
                             Welcome to Coffee Shops where I review coffee shops that I visit. It is an extremely subjective
                             review so don't come at me if you like some cafe that I don't.
                         </p>
