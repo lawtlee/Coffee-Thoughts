@@ -13,6 +13,7 @@ import About from './screens/About'
 import Blogs from './screens/Blogs'
 import Contact from './screens/Contact'
 import PhotoGallery from './components/ImageGallery'
+import ImagePopup from './components/CenteredImages'
 const router = createBrowserRouter([
   {
     path: "/*",

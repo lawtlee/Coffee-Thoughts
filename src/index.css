@@ -14,6 +14,10 @@
 .slick-slide > div {
   margin: 0 10px;
 }
+
+.slick-slide img{margin:auto;left:auto;width: 400px;}
+p.img-slide-text{margin:2rem auto 0;}
+
 .slick-list {
   margin: 0 -10px;
 }
@@ -21,6 +25,14 @@
 .slick-prev:before,
 .slick-next:before {
   color: black;
+}
+
+
+.popup-div{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 }
 
 body {

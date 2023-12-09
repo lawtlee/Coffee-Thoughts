@@ -9,6 +9,7 @@ import About from './About';
 import Blogs from './Blogs';
 import Contact from './Contact';
 import PhotoGallery from '../components/ImageGallery';
+import ImagePopup from '../components/CenteredImages';
 
 const AppRouter:React.FC = () => {
     return(

@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import Slider from "react-slick";
+import ImagePopup from "./CenteredImages";
 
 interface props{
     images: string[];
 }
 
 const PhotoGallery:React.FC<props> = (props) =>{
+    const [focus, setFocus] = useState(false);
+    
     const settings = {
         // className: 'center',
         infinite: true,
@@ -20,12 +23,18 @@ const PhotoGallery:React.FC<props> = (props) =>{
         // centerPadding: '200px'
     };
 
+    const handleClose = () => {
+        setFocus(false)
+    }
+
     return (
         <div className="flex flex-col items-center justify-center">
-            <div className="p-[40px] w-[80vw] inline-block">
+            <div className="p-[40px] w-[80vw] inline-block hover:cursor-pointer"
+                onClick={()=>setFocus(true)}
+            >
                 <Slider {...settings}>
                     {props.images.map((image, index) => (
-                        <div className="w-[200px] h-[200px]">
+                        <div className="w-[300px] h-[250px]">
                             <img
                                 src={image}
                                 alt={`Image ${index}`}
@@ -35,6 +44,9 @@ const PhotoGallery:React.FC<props> = (props) =>{
                     ))}
                 </Slider>
             </div>
+            {focus ? 
+                <ImagePopup images={props.images} show={focus} onClose={handleClose}/> : <></>
+            }
         </div>
     );
 }
