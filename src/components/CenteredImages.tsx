@@ -50,8 +50,8 @@ const ImagePopup:React.FC<props> = (props: props) => {
         height: "400px",
     };
     return (
-        <div className="absolute top-0 flex-col items-center justify-center h-[100vh] w-[100vw]">
-            <div className="p-[50px] w-[100vw] bg-black/50 h-[100vh] flex flex-col justify-center">
+        <div className="fixed top-0 flex-col items-center justify-center h-[100vh] w-[100vw]">
+            <div className="p-[50px] w-[100%] bg-black/50 h-[100%] flex flex-col justify-center">
                 <div className="absolute top-10 right-10 w-[25px] h-[25px] cursor-pointer">
                     <svg
                         width="18"
