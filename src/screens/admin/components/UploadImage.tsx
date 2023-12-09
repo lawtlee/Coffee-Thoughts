@@ -17,7 +17,7 @@ const ImageUpload: React.FC<props> = (props) => {
         const { files } = e.target;
         if (files && files.length) {
             // const filename = files[0].name;
-            // console.log(typeof files[0]);
+            console.log(files[0]);
             // var parts = filename.split(".");
             // const fileType = parts[parts.length - 1];
             // console.log("fileType", fileType); //ex: zip, rar, jpg, svg etc.

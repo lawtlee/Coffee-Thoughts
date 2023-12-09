@@ -50,7 +50,7 @@ function BlogCard(props: prop): JSX.Element {
     return(
         <div className="w-[80%] flex gap-5 h-[75px] items-center bg-white border-black border-2 font-RedHat text-[20px]">
             <div className="w-[15%] bg-[#D9D9D9] h-full flex justify-center items-center">
-                <img src={imagePath} alt="Photo" className="object-cover"/>
+                <img src={imagePath} alt="Photo" className="object-contain w-[100%] h-[100%]"/>
             </div>
             <div className="flex items-center justify-evenly w-[85%]">
                 <p className="w-[55%] text-ellipsis overflow-hidden whitespace-nowrap">{props.blog.title}</p>
