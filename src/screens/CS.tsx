@@ -26,7 +26,7 @@ const CS: React.FC = () => {
     })
 
     return (
-        <div className="w-screen min-h-screen flex flex-col items-center gap-10 bg-white">
+        <div className="min-h-screen flex flex-col items-center gap-10 bg-white">
             <Navbar />
             <div
                 className={`flex flex-row flex-wrap w-[80vw] items-center justify-evenly h-fit pt-10 pb-10 gap-5`}

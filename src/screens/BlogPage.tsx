@@ -56,7 +56,7 @@ const BlogPage: React.FC = () => {
     },[])
 
     return(
-        <div className="flex flex-col gap-10 items-center w-screen bg-[#FFF7ED] min-h-screen">
+        <div className="flex flex-col gap-10 items-center bg-[#FFF7ED] min-h-screen">
             <Navbar/>
             <div className="flex flex-col text-left gap-5 w-[80vw] text-[#547E88]">
                 <div>
