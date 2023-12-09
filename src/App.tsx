@@ -12,8 +12,7 @@ import CoffeeShops from './screens/CoffeeShops'
 import About from './screens/About'
 import Blogs from './screens/Blogs'
 import Contact from './screens/Contact'
-import PhotoGallery from './components/ImageGallery'
-import ImagePopup from './components/CenteredImages'
+// import PhotoGallery from './components/ImageGallery'
 const router = createBrowserRouter([
   {
     path: "/*",
@@ -27,7 +26,7 @@ const router = createBrowserRouter([
       { path: "about", element: <About />},
       { path: "blogs", element: <Blogs />},
       { path: "contact", element: <Contact />},
-      { path: "test", element: <PhotoGallery images={["Rectangle.png", "Lines.png"]}/>},
+      // { path: "test", element: <PhotoGallery images={["Rectangle.png", "Lines.png"]}/>},
     ],
   },{
     path: "/admin/*",
