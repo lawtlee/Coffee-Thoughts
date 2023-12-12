@@ -24,7 +24,7 @@ const Dashboard: React.FC = () => {
 
 
     return(
-        <div className="flex-col justify-center w-screen items-center flex gap-10">
+        <div className="flex-col justify-center items-center flex gap-10">
             <AdminNavbar/>
             <HelperBar/>
             {blogs.map((blog, key) => <BlogCard key={key} blog={blog}/>)}
