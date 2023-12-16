@@ -9,7 +9,7 @@ const HTML404: React.FC = () => {
             animate={{ opacity: 1 }}
             transition={{ duration: 2 }}
         >
-            <img src="/Coffee-Thoughts/404.png" alt="Sorry this page doesn't exist" />
+            <img src="/404.png" alt="Sorry this page doesn't exist" />
         </motion.div>
     );
 }

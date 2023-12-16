@@ -76,7 +76,7 @@ const AdminHome: React.FC = () => {
                 } : "show"} 
                 transition={{duration: error ? 0 : 1}} 
             >
-                <img src="/Coffee-Thoughts/admin/login/cloud.png" alt="clouds" />
+                <img src="/admin/login/cloud.png" alt="clouds" />
                 <div className="flex justify-center items-center text-center">
                     <p className="text-white text-[40px] tracking-[30px]">
                         COFFEE THOUGHTS

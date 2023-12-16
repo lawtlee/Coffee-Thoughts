@@ -38,7 +38,7 @@ const router = createBrowserRouter([
       {path:"addblog", element: <AddBlog/>},
     ]
   }
-], {basename: "/Coffee-Thoughts/"});
+], {basename: "/"});
 
 function App() {
   return (

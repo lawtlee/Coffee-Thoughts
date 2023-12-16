@@ -30,7 +30,7 @@ const HelperBar:React.FC = () => {
                     />
                 </div>
                 <div className={`pr-5 ${startSearch ? "block" : "hidden"}`}>
-                    <img src="/Coffee-Thoughts/admin/search.png" alt="search button"/>
+                    <img src="/admin/search.png" alt="search button"/>
                 </div>
             </div>
             <div className="cursor-pointer"

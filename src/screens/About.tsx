@@ -8,14 +8,14 @@ const About: React.FC = () => {
         <div className="flex-col flex items-center min-h-screen gap-10 justify-between bg-white">
             <Navbar />
             <img
-                src="/Coffee-Thoughts/Lines.png"
+                src="/Lines.png"
                 alt="backgrop"
                 className="z-[0] absolute inset-1/2 transform -translate-x-1/2 -translate-y-1/2"
             />
             <div className="flex flex-row flex-wrap">
                 <div className="flex flex-row w-[80vw] items-center justify-evenly">
                     <img
-                        src="/Coffee-Thoughts/BigRect.png"
+                        src="/BigRect.png"
                         alt="bg"
                         className="absolute z-[0] hidden lg:block opacity-90"
                     />

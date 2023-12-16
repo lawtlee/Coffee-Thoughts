@@ -32,13 +32,13 @@ const Deez: React.FC = () => {
                 className={`flex flex-row flex-wrap w-[80vw] items-center justify-evenly h-fit pt-10 pb-10 gap-5`}
             >
                 <img
-                    src="/Coffee-Thoughts/Lines.png"
+                    src="/Lines.png"
                     alt="backgrop"
                     className="z-[0] absolute"
                 />
                 <div className="flex flex-row w-[80vw] items-center justify-evenly">
                     <img
-                        src="/Coffee-Thoughts/Rectangle.png"
+                        src="/Rectangle.png"
                         alt="bg"
                         className="absolute z-[0] hidden lg:block"
                     />
