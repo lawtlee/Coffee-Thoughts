@@ -125,7 +125,7 @@ const Home: React.FC = () => {
                 
             </div>
             <div className="relative w-full">
-                <motion.div className="absolute bottom-0 right-0 z-0 xl:block hidden" initial={{scale: 1}}>
+                <motion.div className={`absolute bottom-0 right-0 z-0 xl:block hidden ${blogs.length < 2 ? "xl:hidden" : ""}`} initial={{scale: 1}}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="561" height="538" viewBox="0 0 561 538" fill="none">
                         <path d="M417.715 22.6488C475.431 -9.46067 560.715 3.64887 560.715 3.64887V537.149H116.715C116.715 537.149 18.1079 457.359 4.71533 402.149C-11.1172 336.881 27.6324 293.188 46.2154 228.649C69.037 149.39 122.215 106.617 185.215 98.6488C227.77 93.2663 277.56 110.738 318.715 98.6488C363.764 85.4164 376.686 45.4749 417.715 22.6488Z" fill="#547E88" stroke="#547E88"/>
                     </svg>    

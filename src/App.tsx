@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouterProvider  } from 'react-router-dom'
+import { createBrowserRouter, createHashRouter, RouterProvider  } from 'react-router-dom'
 import HTML404 from './screens/404html'
 import AdminRouter from './screens/admin/AdminRouter'
 import Dashboard from './screens/admin/AdminDashboard'
@@ -13,7 +13,7 @@ import About from './screens/About'
 import Blogs from './screens/Blogs'
 import Contact from './screens/Contact'
 // import PhotoGallery from './components/ImageGallery'
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
     path: "/*",
     element: <AppRouter />,
@@ -38,7 +38,7 @@ const router = createBrowserRouter([
       {path:"addblog", element: <AddBlog/>},
     ]
   }
-], {basename: "/Coffee-Thoughts/"});
+], {});
 
 function App() {
   return (
