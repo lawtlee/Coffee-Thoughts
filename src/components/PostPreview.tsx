@@ -51,12 +51,12 @@ function Preview(props: props): JSX.Element {
 
     return(
         <div className={`flex w-[75vw] ${(index % 2 == 0) ? "flex-row" : "flex-row-reverse"} flex-wrap justify-between z-[1] gap-2`}>
-            <div className={`md:w-[45%] md:h-[301px] h-[20vh] w-full flex justify-center items-center hover:cursor-pointer`}>
-                <img src={imagePath} alt="Photo" className="object-contain h-[100%] w-[100%]"/>
+            <div className={`md:w-[45%] md:h-[301px] h-[20vh] w-full flex justify-center items-center`}>
+                <img src={imagePath} className={`object-contain h-[100%] w-[100%] ${imagePath != "" ? "" : "hidden"}`}/>
             </div>
             <div className={`md:w-[45%] h-full flex flex-col gap-5 md:text-left w-full text-teal`}>
                 <p className="font-NovoMono text-[16px]">{date.getMonth() + 1}.{date.getDate()}.{date.getFullYear()}</p>
-                <p className="font-semibold text-[32px]">{props.blog.title}</p>
+                <p className="font-semibold text-[32px] text-ellipsis">{props.blog.title}</p>
                 <p className="font-RedHat text-[20px]">
                     {props.blog.description}
                 </p>

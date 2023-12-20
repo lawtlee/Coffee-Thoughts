@@ -1,5 +1,4 @@
-// import { Timestamp } from "firebase/firestore";
-
+import { Blog } from "./types";
 
 function TimeStampToDate(date : any){
     console.log(date)
@@ -18,4 +17,29 @@ function sortByDate(blogs: Array<any>, asc: boolean): Array<any>{
     return blogs;
 }
 
-export { TimeStampToDate, sortByDate }
+function sortByCategory(blogs: Array<Blog>, category: string): Array<Blog>{
+
+    return blogs
+}
+
+async function autoFill(blogs: Array<Blog>, query: string): Promise<Array<string>>{
+    const results:  string[] = [];
+
+    if (query == "")
+        return []
+
+    for (const blog of blogs){
+        const dateTime =  new Date((blog.date.seconds * 1000) + (blog.date.nanoseconds / 1000000))
+        const date = `${dateTime.getMonth()}.${dateTime.getDay()}.${dateTime.getFullYear()}`
+        if (blog.title.toLowerCase().includes(query.toLowerCase()) 
+            || blog.description.toLowerCase().includes(query.toLowerCase()) 
+            || date.includes(query.toLowerCase())){
+            if (results.length < 5)
+                results.push(blog.title);
+        }   
+    }
+
+    return results;
+}
+
+export { TimeStampToDate, sortByDate, sortByCategory, autoFill }

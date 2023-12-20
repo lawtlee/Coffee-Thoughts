@@ -28,7 +28,7 @@ const PhotoGallery:React.FC<props> = (props) =>{
     }
 
     return (
-        <div className="flex flex-col items-center justify-center">
+        <div className="flex flex-col items-center justify-center relative">
             <div className="p-[40px] w-[80vw] inline-block hover:cursor-pointer"
                 onClick={()=>setFocus(true)}
             >

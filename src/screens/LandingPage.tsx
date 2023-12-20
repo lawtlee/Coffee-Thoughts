@@ -1,8 +1,9 @@
-import React, { Dispatch, SetStateAction, useState } from "react";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
 interface popup{
     setStatus: Dispatch<SetStateAction<boolean>>;
+    status: boolean;
 }
 
 const coffeeCup = {
@@ -35,10 +36,12 @@ const shiftRight = {
     }
 };
 
-const LandingPage: React.FC<popup> = ({ setStatus }) =>{
+const LandingPage: React.FC<popup> = ({ setStatus, status }) =>{
     const [hover, setHover] = useState(false);
     const [animate, setAnimation] = useState(false);
     const [hide, setHide] = useState(false);
+
+    // console.log(hide)
 
     const startAnimation = async() =>{
         setAnimation(true);
@@ -50,8 +53,12 @@ const LandingPage: React.FC<popup> = ({ setStatus }) =>{
         });
     }
 
+    useEffect(()=>{
+        setHide(status);
+    },[status])
+
     return (
-        <div className="overflow-hidden h-fit">
+        <div className={`overflow-hidden min-h-screen ${hide ? "hidden" : "block"}`}>
             <motion.div 
                 className="flex-col flex items-center justify-center min-h-[100vh] h-fit"
                 initial="show"
