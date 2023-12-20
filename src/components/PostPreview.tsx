@@ -35,17 +35,19 @@ function Preview(props: props): JSX.Element {
             date: props.blog.date,
         }})
     }
-
-    const getImageUrl = async() => {
-        if (props.blog.images.length != 0)
-            setPath(await retrieveImage(props.blog.images[0]))
-    }
     
-    useEffect(()=>{
-        if (props.index) setIndex(props.index)
-        if (props.blog.images.length != 0 && imagePath == "")
-            getImageUrl();
-    },[])
+    useEffect(() => {
+        if (props.index) setIndex(props.index);
+    
+        const loadImageUrl = async () => {
+            if (props.blog.images.length !== 0 && imagePath === "") {
+                const path = await retrieveImage(props.blog.images[0]);
+                setPath(path);
+            }
+        };
+    
+        loadImageUrl();
+    }, [props.blog.images, imagePath, props.index]);
 
     return(
         <div className={`flex w-[75vw] ${(index % 2 == 0) ? "flex-row" : "flex-row-reverse"} flex-wrap justify-between z-[1] gap-2`}>
