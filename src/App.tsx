@@ -1,4 +1,4 @@
-import { createBrowserRouter, createHashRouter, RouterProvider  } from 'react-router-dom'
+import { createHashRouter, RouterProvider  } from 'react-router-dom'
 import HTML404 from './screens/404html'
 import AdminRouter from './screens/admin/AdminRouter'
 import Dashboard from './screens/admin/AdminDashboard'
