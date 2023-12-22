@@ -7,7 +7,7 @@ const Footer:React.FC = () => {
     const navigate = useNavigate()
 
     return(
-        <div className="flex flex-col bottom-0">
+        <div className="flex flex-col">
             <div className="w-[80vw] border-[#9B8F84] border-[1px]"/>
             <div className="min-w-[80vw] flex flex-row justify-between text-[#9B8F84] h-[7.5vh] items-center">
                 <div className="cursor-default" onClick={()=>navigate('/admin')}>

@@ -5,7 +5,7 @@ function TimeStampToDate(date : any){
     return 1;
 }
 
-function sortByDate(blogs: Array<any>, asc: boolean): Array<any>{
+function sortByDate(blogs: Array<any>, asc: boolean): Array<Blog>{
     // Ascending is oldest, descending is newest
     // If Asc sort by oldest first, Descending is sort by newest
     let sorting = asc ? 1 : -1;
@@ -18,8 +18,14 @@ function sortByDate(blogs: Array<any>, asc: boolean): Array<any>{
 }
 
 function sortByCategory(blogs: Array<Blog>, category: string): Array<Blog>{
+    const result = <Blog[]>[]
+    
+    blogs.forEach((blog)=>{
+        if (blog.category == category)
+            result.push(blog)
+    })
 
-    return blogs
+    return result
 }
 
 async function autoFill(blogs: Array<Blog>, query: string): Promise<Array<string>>{

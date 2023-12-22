@@ -24,7 +24,8 @@ const BlogPage: React.FC = () => {
         setImages(await retrieveAllImages(blog.images))
         const formatDate = new Date((blog.date.seconds * 1000) + (blog.date.nanoseconds / 1000000))
         setDate(`${formatDate.getMonth() + 1}.${formatDate.getDate()}.${formatDate.getFullYear()}`)
-        if (blog.bodyText.split(/\r\n|\r|\n/).length < 7) {
+        if ((blog.bodyText.split(/\r\n|\r|\n/).length < 7 && images.length != 0) || 
+            (images.length == 0 && blog.bodyText.split(/\r\n|\r|\n/).length < 11)) {
             setAbsolute("md:absolute");
         }
     }
@@ -55,17 +56,23 @@ const BlogPage: React.FC = () => {
         }
     },[])
 
+    useEffect(()=>{
+
+    },[images])
+
     return(
-        <div className="flex flex-col gap-10 items-center bg-[#FFF7ED] min-h-screen">
+        <div className="flex flex-col gap-10 items-center bg-[#FFF7ED] min-h-screen relative">
             <Navbar/>
             <div className="flex flex-col text-left gap-5 w-[80vw] text-[#547E88]">
                 <div>
-                    <p className="text-[16px] font-NovoMono">{date}</p>
-                    <p className="text-[48px]">{title.toUpperCase()}</p>
+                    <p className="md:text-[16px] text-[12px] font-NovoMono">{date}</p>
+                    <p className="md:text-[48px] text-[24px] text-wrap">{title.toUpperCase()}</p>
                 </div>
-                <p className="whitespace-pre-line text-[20px] font-NovoMono">{body}</p>
+                <p className="whitespace-pre-line md:text-[20px] text-[12px] font-NovoMono">{body}</p>
             </div>
-            <PhotoGallery images={images}/>
+            <div className="block mb-10">
+                <PhotoGallery images={images}/>
+            </div>
             <div className={`bottom-0 ${absolute}`}>
                 <Footer/>
             </div>

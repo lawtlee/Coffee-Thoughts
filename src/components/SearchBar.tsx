@@ -10,7 +10,7 @@ import { Blog } from "../utilities/types";
 interface props{
     sortByDate: (method: string) => Promise<any>;
     sortByCategory: (method: string) => Promise<any>;
-    searchFunction: () => Promise<any>;
+    searchFunction: (query: string) => Promise<any>;
     blogs: Array<Blog>;
 }
 
@@ -24,7 +24,7 @@ const SearchBar: React.FC<props> = (props: props) => {
     const wrapperRef = useRef<HTMLDivElement>(null)
 
     const handleEnter = () => {
-        
+        props.searchFunction(query)
     };
 
     const handleSort = (value: string) =>{

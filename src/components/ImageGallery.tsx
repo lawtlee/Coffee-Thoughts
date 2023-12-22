@@ -29,12 +29,12 @@ const PhotoGallery:React.FC<props> = (props) =>{
 
     return (
         <div className="flex flex-col items-center justify-center relative">
-            <div className="p-[40px] w-[80vw] inline-block hover:cursor-pointer"
-                onClick={()=>setFocus(true)}
-            >
+            <div className="p-[40px] w-[80vw] inline-block hover:cursor-pointer">
                 <Slider {...settings}>
                     {props.images.map((image, index) => (
-                        <div className="w-[300px] h-[250px]">
+                        <div className="w-[300px] h-[250px] hover:cursor-zoom-in"
+                            onClick={()=>setFocus(true)}
+                        >
                             <img
                                 src={image}
                                 alt={`Image ${index}`}

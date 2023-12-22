@@ -1,20 +1,10 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { retrieveImage } from "../utilities/utilities"
+import { Blog } from "../utilities/types"
 
 interface props{
-    blog:{
-        title: string,
-        date: {
-            seconds: number,
-            nanoseconds: number,
-        },
-        id: string,
-        images: Array<string>,
-        category: string
-        description: string,
-        bodyText: string
-    },
+    blog: Blog,
     index: number,
     key: any,
 }
@@ -22,7 +12,7 @@ interface props{
 function Preview(props: props): JSX.Element {
     const [index, setIndex] = useState(0)
     const [imagePath, setPath] = useState("")
-    const date = new Date((props.blog.date.seconds * 1000) + (props.blog.date.nanoseconds / 1000000))
+    const date = new Date((props.blog.date.seconds * 1000) + (props.blog.date.nanoseconds / 1000000))    
 
     const navigate = useNavigate();
 
@@ -35,17 +25,22 @@ function Preview(props: props): JSX.Element {
             date: props.blog.date,
         }})
     }
-    
-    useEffect(() => {
-        if (props.index) setIndex(props.index);
-    
-        const loadImageUrl = async () => {
-            if (props.blog.images.length !== 0 && imagePath === "") {
+
+    const loadImageUrl = async () => {
+        if (props.blog.images.length != 0) {
+            try {
                 const path = await retrieveImage(props.blog.images[0]);
                 setPath(path);
+            } catch (error) {
+                console.error("Error loading image:", error);
             }
-        };
+        } else{
+            setPath("")
+        }
+    };
     
+    useEffect(() => {
+        setIndex(props.index);
         loadImageUrl();
     }, [props.blog.images, imagePath, props.index]);
 

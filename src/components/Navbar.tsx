@@ -14,12 +14,12 @@ const Navbar: React.FC = () => {
                     <Link to="/blogs" className="hover:text-[#7B695A]">blogs</Link>
                 </div>
                 <div onClick={()=>navigate('/', {state:{land: true}})} 
-                className="flex justify-evenly font-bold md:text-[40px] sm:text-[36px] text-[24px] cursor-default gap-5">
+                className="flex justify-evenly font-bold md:text-[40px] sm:text-[36px] text-[20px] cursor-default gap-2">
                     <p>COFFEE </p> <p>THOUGHTS</p>
                 </div>
                 <div className="sm:hidden">
                     <img
-                        src={toggle ? "./close.svg" : "./menu.svg"}
+                        src={toggle ? "/close.svg" : "/menu.svg"}
                         alt= "Menu"
                         onClick={()=>setToggle(!toggle)}
                     />

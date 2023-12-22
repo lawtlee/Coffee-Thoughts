@@ -1,7 +1,8 @@
 import { database, storage } from "../firebase"
-import { collection, getDoc, getDocs, addDoc, doc } from "firebase/firestore"
+import { collection, getDoc, getDocs, addDoc, doc, } from "firebase/firestore"
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { sortByDate } from "./dataParsing"
+import { Blog } from "./types";
 
 interface addBlogsProps{
     bodyText: string,
@@ -141,5 +142,33 @@ const retrieveAllImages = async(images: string[]) => {
     return imagePaths;
 }
 
+const searchForBlog = async(search: string): Promise<Blog[]> => {
+    const result = <Blog[]>[]
+
+    const deezSnapshot = await getDocs(collection(database, "deez"));
+    const csSnapshot = await getDocs(collection(database, "cs"));
+    const coffee_shops = await getDocs(collection(database, "coffee-shops"));
+
+    deezSnapshot.forEach(async (data)=>{
+        const blogData = <Blog>data.data();
+        if (blogData.title.includes(search))
+            result.push(blogData)
+    })
+
+    csSnapshot.forEach(async (data)=>{
+        const blogData = <Blog>data.data();
+        if (blogData.title.includes(search))
+            result.push(blogData)
+    })
+
+    coffee_shops.forEach(async (data)=>{
+        const blogData = <Blog>data.data();
+        if (blogData.title.includes(search))
+            result.push(blogData)
+    })
+
+    return result
+}
+
 export { retrieveAllBlogs, addBlogs, retireveAllTopic, 
-    fetchBlogs, uploadImage, retrieveImage, retrieveAllImages }
+    fetchBlogs, uploadImage, retrieveImage, retrieveAllImages, searchForBlog }
