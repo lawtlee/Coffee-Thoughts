@@ -7,7 +7,7 @@ export function useCustomFetch(){
     const { cache } = useContext(AppContext);
 
 
-    const fetchWithCache = useCallback(async(page: number)=>{
+    const fetchWithCache = useCallback(async(page: number): Promise<Blog[]>=>{
         const cacheKey = `pagination:${page}`
         const cacheResponse = cache?.current.get(cacheKey)
 

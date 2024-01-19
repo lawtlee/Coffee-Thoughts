@@ -35,7 +35,7 @@ const Blogs:React.FC = () =>{
 
     const sortByCategoryHelper = async(method: string) => {
         setBlogs(()=>[]);
-        if (method == "Coffee Thoughts"){
+        if (method == "Coffee Shops"){
             const newBlogs = sortByCategory(blogs , "coffee-shops");
             setBlogs(()=>newBlogs);
         } else if (method == "Deez"){
@@ -45,7 +45,6 @@ const Blogs:React.FC = () =>{
             const newBlogs = sortByCategory(blogs, "cs");
             setBlogs(()=>newBlogs);
         } else if (method == "All"){
-            // TODO Add caching
             const tempBlogs = await fetchWithCache(pageNumber)
             setBlogs(()=>tempBlogs)
         }
@@ -76,11 +75,18 @@ const Blogs:React.FC = () =>{
         } else if (tempBlogs.length == 1){
             setBlogs([tempBlogs[0]])
         }
+        await new Promise(() => {
+            setTimeout(() => {
+                setForceUpdate(false)
+            }, 1000);
+        });
     }
 
     useEffect(()=>{
         if (!load){
+            setForceUpdate(true);
             setLoad(true)
+            setPage(0);
             getBlogs();
         }
     },[])
@@ -97,10 +103,15 @@ const Blogs:React.FC = () =>{
             <SearchBar sortByCategory={sortByCategoryHelper} sortByDate={sortByDateHelper} searchFunction={searchFunctionHelper} blogs={blogs}/>
             <div className="flex flex-col gap-10 items-center">
                 {blogs.length == 0 && load ? (
-                    <div className="md:text-[48px] font-RedHat flex flex-wrap flex-row text-[24px] 
-                    max-w-[70vw] h-[50vh]  justify-center text-center text-[#547E88]">
-                        <p> Unfortunately there aren't any posts</p>
-                    </div>
+                    <>
+                        <div className={`${forceUpdate ? "flex" : "hidden"} flex-col justify-center items-center w-full h-[60vh]`}>
+                            <CircularProgress sx={{color: "#9B8F84"}}/>
+                        </div>
+                        <div className={`md:text-[48px] font-RedHat flex flex-wrap flex-row text-[24px] 
+                        max-w-[70vw] h-[50vh]  justify-center text-center text-[#547E88]  ${forceUpdate ? "hidden" : "flex" }`}>
+                            <p> Unfortunately there aren't any posts</p>
+                        </div>
+                    </>
                 ) : (<>
                         <div className={`min-h-[75vh] flex-col gap-10 items-center ${forceUpdate ? "hidden" : "flex" }`}>
                             {blogs.map(
